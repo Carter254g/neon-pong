@@ -15,7 +15,7 @@
     "build:all": "electron-builder --mac --win"
   },
   "dependencies": {
-    "tiktok-live-connector": "^1.2.7",
+    "tiktok-live-connector": "^2.0.9",
     "ws": "^8.16.0",
     "dotenv": "^16.4.5"
   },
