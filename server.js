@@ -29,10 +29,20 @@ const httpServer = http.createServer((req, res) => {
     res.end(JSON.stringify({ status:'ok', tiktok:TIKTOK_USERNAME, uptime:Math.floor(process.uptime()), clients:clients.size }));
     return;
   }
-  if (req.url === '/' || req.url === '/index.html') {
-    fs.readFile(path.join(__dirname, 'index.html'), (e, data) => {
+  const staticFiles = {
+    '/':             { file:'index.html',    type:'text/html' },
+    '/index.html':   { file:'index.html',    type:'text/html' },
+    '/manifest.json':{ file:'manifest.json', type:'application/manifest+json' },
+    '/sw.js':        { file:'sw.js',         type:'application/javascript' },
+    '/icon-192.png': { file:'icon-192.png',  type:'image/png' },
+    '/icon-512.png': { file:'icon-512.png',  type:'image/png' },
+  };
+  const sf = staticFiles[req.url];
+  if (sf) {
+    fs.readFile(path.join(__dirname, sf.file), (e, data) => {
       if (e) { res.writeHead(404); res.end('Not found'); return; }
-      res.writeHead(200, { 'Content-Type':'text/html', 'Cache-Control':'no-cache' });
+      const cache = sf.file==='sw.js' ? 'no-cache' : sf.file.endsWith('.png') ? 'public,max-age=86400' : 'no-cache';
+      res.writeHead(200, { 'Content-Type': sf.type, 'Cache-Control': cache });
       res.end(data);
     });
     return;
