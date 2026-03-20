@@ -2,13 +2,18 @@
   "name": "Neon Pong × TikTok Live",
   "short_name": "Neon Pong",
   "description": "TikTok Live Pong Game",
-  "start_url": "/",
+  "start_url": "/?pwa=1",
+  "scope": "/",
   "display": "fullscreen",
-  "orientation": "portrait",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
   "background_color": "#0a0a12",
   "theme_color": "#0a0a12",
+  "categories": ["games", "entertainment"],
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
